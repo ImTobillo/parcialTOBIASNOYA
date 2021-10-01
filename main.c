@@ -131,7 +131,7 @@ void informarGanadorYEliminarDeLista (nodo** lista, Boleto boletoGanador)
     while (retornarCantAciertos(aux->dato, boletoGanador) != 4) /// lo hago de esta forma porque tengo la certeza de que hay un ganador
         aux = aux->sig;
 
-    printf("\nEL GANADOR ES %s\n", aux->dato.nombre);
+    printf("\nLA GANADORA ES.. %s\n", aux->dato.nombre);
     borrarGanadorLista(lista, aux->dato);
 }
 
@@ -160,16 +160,31 @@ void agregar2doPremioY3Premio (nodo** lista, Fila* prem2, Fila* prem3, Boleto bo
 
         aux = aux->sig;
     }
-
-
-
 }
-
 
 /// 4)
 
+void mostrarFilaGanadoresRec2 (Fila* f, Fila* aux)
+{
+    if (!filaVacia(*f))
+    {
+        BoletoPersona bolPer = frente(*f);
+        printf("%s\n", bolPer.nombre);
+        poneFila(aux, sacaFila(f));
+        mostrarFilaGanadoresRec2(f, aux);
+    }
+}
 
+void mostrarFilaGanadoresRec (Fila* f)
+{
+    Fila aux;
+    inicFila(&aux);
 
+    mostrarFilaGanadoresRec2(f, &aux);
+
+    while (!filaVacia(aux))
+        poneFila(f, sacaFila(&aux));
+}
 
 
 /// main
@@ -192,9 +207,12 @@ int main()
     inicFila(&premios2);
     inicFila(&premios3);
 
+    agregar2doPremioY3Premio(&lista, &premios2, &premios3, boletoGanador);
 
-
-
+    printf("\nPREMIOS 2:\n");
+    mostrarFilaGanadoresRec(&premios2);
+    printf("\nPREMIOS 3:\n");
+    mostrarFilaGanadoresRec(&premios3);
 
     return 0;
 }
