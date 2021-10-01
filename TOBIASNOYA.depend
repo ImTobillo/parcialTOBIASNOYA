@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1633116836 source:c:\users\liliana cosmano\desktop\tobiasnoya\main.c
+	<stdio.h>
+	<stdlib.h>
+	"string.h"
+	"Fila.h"
+
+1633114794 c:\users\liliana cosmano\desktop\tobiasnoya\fila.h
+	<stdio.h>
+	<stdlib.h>
+
+1633114794 source:c:\users\liliana cosmano\desktop\tobiasnoya\fila.c
+	"Fila.h"
+
